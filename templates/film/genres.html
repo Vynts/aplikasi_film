@@ -1,0 +1,30 @@
+{% extends 'template/themes.html'%}
+{% block title %} {{ judul.tipegenre }} {% endblock %}
+{% block konten %}
+
+<div class="container py-1">
+    <h4 class="text-center my-3">Genre {{ judul.cur }} <hr></h4>
+    <div class="row mx-auto">
+        
+        <div>
+            <style>
+                .title-text {
+                    text-decoration: none !important; 
+                    color: black;
+                }
+            </style>
+        </div>
+
+        {% for i in data %}
+       <a class="col-md-2 text-decoration-none p-2 rounded" href="/detail/{{ i.idfilm }}">
+            <img src="{{ url_for('static', filename='images/' ~ i.posterfilm )}}" alt=".." class="rounded">
+            <h6 class="text-black text-center m-1">{{ i.namafilm }}</h6> 
+        </a>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}

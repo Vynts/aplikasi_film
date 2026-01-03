@@ -1,0 +1,242 @@
+{% extends 'template/dashboard.html' %} {% block title %} {% endblock %} {%
+block konten %}
+
+<div class="container">
+  <div class="row my-5">
+    <h4 class="col-md-8">Data Film</h4>
+
+    <div class="col-md-4">
+      <form>
+        <div class="row">
+          <div class="col-md-7">
+            <input
+              class="rounded-5 form-control"
+              type="search"
+              name="search"
+              placeholder="Search..."
+            />
+          </div>
+          <div class="col-md-5">
+            <div class="btn-group">
+              <input class="btn btn-primary" type="submit" value="Search"/>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <i class="bi bi-file-earmark-plus-fill"></i>Film
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div
+      class="modal modal-lg fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Tambah Data Film
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              action="/film/tambah"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for="">Nama Film</label>
+                <div class="col-md-9">
+                  <input
+                    name="namafilm"
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukan Nama Film"
+                  />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for=""
+                  >Deskripsi Film</label
+                >
+                <div class="col-md-9">
+                  <textarea
+                    name="deskripsi"
+                    class="form-control"
+                    placeholder="Masukan Deskripsi Film"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for=""
+                  >Tahun Rilis</label
+                >
+                <div class="col-md-9">
+                  <input
+                    name="tahunrilis"
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukan Tahun Rilis"
+                  />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for="">Sutradara</label>
+                <div class="col-md-9">
+                  <input
+                    name="sutradara"
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukan Nama Sutradara"
+                  />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for=""
+                  >Bintang Film</label
+                >
+                <div class="col-md-9">
+                  <input
+                    name="artis"
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukan Nama Bitang Film"
+                  />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for="">Tipe Film</label>
+                <div class="col-md-9">
+                  <select class="form-control" name="filmtype">
+                    <option value="animated">Animated</option>
+                    <option value="drama">Drama</option>
+                    <option value="movie">Movie</option>
+                    <option value="series">Series</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for=""
+                  >Poster Film</label
+                >
+                <div class="col-md-9">
+                  <input name="poster" type="file" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for="">Video Film</label>
+                <div class="col-md-9">
+                  <input name="videofilm" type="file" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row m-4">
+                <label class="col-form-label col-md-3" for="">Genre Film</label>
+                <div class="col-md-9">
+                  <select name="idgenre" class="form-control">
+                    {% for i in genre %}
+                    <option value="{{ i.idgenre }}">{{ i.tipegenre }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="mx-4 my-4">
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-success" />
+                  <a href="/dashboard" class="btn btn-primary">Kembali</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>id</th>
+      <th>nama</th>
+      <th>poster</th>
+      <th>deskripsi</th>
+      <th>video</th>
+      <th>sutradara</th>
+      <th>artis</th>
+      <th>film type</th>
+      <th>tahun</th>
+      <th>aksi</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+      <td>{{ (( page - 1) * per_page ) + loop.index }}</td>
+      <td>{{ i.namafilm }}</td>
+      <td>
+        <img
+          width="50px"
+          height="80px"
+          src="{{ url_for('static', filename='images/' ~ i.posterfilm) }}"
+          alt="tes"
+        />
+      </td>
+      <td>{{ i.deskripsi }}</td>
+      <td>{{ i.videofilm }}</td>
+      <td>{{ i.sutradara }}</td>
+      <td>{{ i.artis }}</td>
+      <td>{{ i.filmtype }}</td>
+      <td>{{ i.tahunrilis }}</td>
+      <td>
+        <div class="btn-group" role="group">
+          <a href="/film/edit?id={{ i.idfilm }}" class="btn btn-primary"
+            ><i class="bi bi-pencil-square"></i
+          ></a>
+          <a href="/film/hapus?id={{ i.idfilm }}" class="btn btn-danger"
+            ><i class="bi bi-trash3"></i
+          ></a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end my-4">
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+      {% for i in range(1, total_page + 1) %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{i}}">{{ i }}</a>
+      </li>
+      {% endfor %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ total_page }}">&raquo;</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+{% endblock %}

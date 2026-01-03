@@ -1,0 +1,23 @@
+{% extends 'template/dashboard.html' %}
+{% block title %} {% endblock %}
+{% block konten %}
+
+<div class="container">
+<h5 class="text-center my-5">Update {{ data.tipegenre }}</h5>
+
+<form method="post">
+        <div class="row m-4">
+            <label class="col-form-label col-md-2" for="">Tipe Genre :</label>
+            <div class="col-md-10">
+                <input name="genre" type="text" class="form-control" placeholder="Masukan Nama Genre">
+            </div>
+        </div>
+
+        <div class="mx-4 my-4">
+            <input type="submit" class="btn btn-success">
+            <a href="/genre/tampil" class="btn btn-primary">Kembali</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

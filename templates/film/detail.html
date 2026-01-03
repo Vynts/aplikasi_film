@@ -1,0 +1,94 @@
+{% extends 'template/themes.html' %} {% block title %} Movies {% endblock %} {%
+block konten %}
+
+<div class="p-5">
+  <div class="row">
+    <div class="col-md-10">
+      <video width="100%" height="650" controls style="object-fit: cover">
+        <source
+          src="{{ url_for('static', filename='videos/' ~ data.videofilm ) }}"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <h4 class="text-center">Film Relevan</h4>
+        <hr />
+        {% for i in film %}
+        <a
+          class="row text-decoration-none text-black m-2"
+          href="/detail/{{ i.idfilm }}"
+        >
+          <img
+            class="col-md-5"
+            src="{{ url_for('static', filename='images/' ~ i.posterfilm)}}"
+            alt=""
+          />
+          <div class="col-md-7">
+            <h6 class="">{{ i.namafilm }}</h6>
+            <p>{{ i.tahunrilis }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+      <h4 class="my-2">{{data.namafilm}}</h4>
+      <p class="m-3 col-md-1 text-center text-white rounded p-1 bg-danger">
+        {{ data.tahunrilis }}
+      </p>
+      <p class="m-3 col-md-1 text-center text-white rounded p-1 bg-danger">
+        {{ data.tipegenre }}
+      </p>
+      <p class="my-2 col-md-10">{{ data.deskripsi }}</p>
+      <div class="col-md-12 my-1">
+        <p>Film Type : {{ data.filmtype }}</p>
+      </div>
+      <div class="col-md-12 my-1">
+        <p>Sutradara : {{ data.sutradara }}</p>
+      </div>
+      <div class="col-md-12 my-1">
+        <p>Bintang Film : {{ data.artis }}</p>
+      </div>
+      <img
+        class="col-md-1"
+        src="{{ url_for('static', filename='images/' ~ data.posterfilm)}}"
+      />
+
+  </div>
+  <div class="col-md-10 shadow p-4 my-4">
+    <form method="post">
+      <h5 class="my-4 text-center">Tambahkan komentar</h5>
+      <p class="my-2">Username</p>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Masukan Nama Anda"
+        name="nama"
+      />
+      <p class="my-2">Komentar</p>
+      <textarea
+        class="form-control"
+        name="komentar"
+        style="width: 100%; height: 80px"
+        placeholder="Masukan Komentar"
+      ></textarea>
+      <input type="submit" value="Komen" class="btn btn-danger my-3" />
+    </form>
+  </div>
+  <div class="col-md-10 shadow p-4 my-5">
+    <h5 class="my-3">Komentar</h5>
+    {% for i in komentar %}
+    <div class="">
+      <!-- <img class="col" width="2px" height="50px" src="{{ url_for('static', filename='images/profile.jpeg')}}"> -->
+      <div class="">
+        <h6>{{ i.nama }}</h6>
+        <p class="text-secondary">{{ i.komentar }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

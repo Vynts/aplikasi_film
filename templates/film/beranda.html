@@ -1,0 +1,60 @@
+{% extends 'template/themes.html' %} 
+{% block title %} Home {% endblock %} 
+{% block
+konten %}
+
+<div>
+    
+    <div class="row mx-auto">
+        
+        <div>
+            <style>
+                .title-text {
+                    text-decoration: none !important; 
+                    color: black;
+                }
+            </style>
+        </div>
+
+        <section class="bg-dark text-white py-4">
+            <div class="container row mx-auto">
+                <h4>Film Terbaru</h4>
+                <hr>
+                {% for i in data %}
+                <a class="col-sm-2 judulfilm rounded my-3" href="/detail/{{ i.idfilm }}">
+                    <img width="195px" height="275px" src="{{ url_for('static', filename='images/' ~ i.posterfilm )}}" alt=".." class="rounded">
+                    <div class="d-flex justify-content-center"><h6 class=" my-2">{{ i.namafilm }}</h6> </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="d-flex my-2 justify-content-center m"><a href="/movies" class="btn btn-danger">Lihat Lebih Banyak</a></div>
+            
+        </section>
+    </div>
+
+    <div class="container alert alert-success my-4">
+     <b>PENTING ! Catat dan Bookmark alamat URL NetfliC http://127.0.0.1:5000. Gabung bersama group telegram NetfliC di NetfliCTelegram. Video cara install VPN Gratis Youtube. NetfliC on Instagram</b>
+    </div>
+
+    <div class="container">
+        <div class="">
+            <div class="my-4">
+                <h4 class=""><a class="text-decoration-none text-black" href="">Film Terpopuler</a></h4>
+                <div class="row">
+                    {% for i in populer %}
+                        <a class="col-sm-2 judulfilm rounded my-3" href="/detail/{{ i.idfilm }}">
+                            <img width="200px" height="285px" src="{{ url_for('static', filename='images/' ~ i.posterfilm )}}" alt=".." class="rounded">
+                            <div class="d-flex justify-content-center"><h6 class="text-black my-2">{{ i.namafilm }}</h6> </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+          
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'template/dashboard.html' %}
+{% block title %} {% endblock %}
+{% block konten %}
+
+<div class="container">
+  <div class="row my-5">
+    <h4 class="col-md-8">Data Genre</h4>
+
+    <div class="col-md-4">
+      <form>
+        <div class="row">
+          <div class="col-md-7">
+            <input
+              class="rounded-5 form-control"
+              type="search"
+              name="search"
+              placeholder="Search..."
+            />
+          </div>
+          <div class="col-md-5">
+            <div class="btn-group">
+              <input class="btn btn-primary" type="submit" value="Search"/>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <i class="bi bi-file-earmark-plus-fill "></i>Genre
+              </button>
+            </div>
+          </div>z
+        </div>
+      </form>
+    </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Genre</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row" method="post" action="/genre/tambah">
+                    <label class="text-center mx-auto my-1" for="col-form-label">Nama Genre</label>
+                    <div class="my-4">
+                        <input type="text" class="form-control" name="genre" placeholder="Masukan Data Genre">
+                    </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" name="" id="">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>id</th>
+            <th>genre</th>
+            <th>cur</th>
+            <th>aksi</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ ((page - 1) * per_page) + loop.index }}</td>
+            <td>{{ i.tipegenre }}</td>
+            <td>{{ i.cur }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a href="/genre/edit?id={{ i.idgenre }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                    <a href="/genre/hapus?id={{ i.idgenre }}" onclick="return confirm('Are you Sure?')" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end my-4">
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+            {% for i in range(1, total_page + 1) %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{ i }}</a></li>
+            {% endfor %}
+            <li class="page-item"><a class="page-link" href="?page={{ total_page }}">&raquo;</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

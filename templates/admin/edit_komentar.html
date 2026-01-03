@@ -1,0 +1,32 @@
+{% extends 'template/dashboard.html' %}
+{% block title %} {% endblock %}
+{% block konten %}
+
+<div class="container">
+<h5 class="text-center my-5">Update Komentar</h5>
+<p>Film : {{ data.namafilm }}</p>
+
+<form method="post">
+        <div class="row m-4">
+            <label class="col-form-label col-md-2" for="">Username</label>
+            <div class="col-md-10">
+                <input name="nama" type="text" class="form-control" placeholder="Masukan Nama Genre" value="{{ data.nama }}">
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <label class="col-form-label col-md-2" for="">Komentar</label>
+            <div class="col-md-10">
+                <input name="komentar" type="text" class="form-control" placeholder="Masukan Nama Genre" value="{{ data.komentar }}">
+            </div>
+        </div>
+
+
+        <div class="mx-4 my-4">
+            <input type="submit" class="btn btn-success">
+            <a href="/komentar/tampil" class="btn btn-primary">Kembali</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

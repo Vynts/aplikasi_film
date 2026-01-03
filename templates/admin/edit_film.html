@@ -1,0 +1,113 @@
+{% extends 'template/dashboard.html' %}
+{% block title %} {% endblock %}
+{% block konten %}
+
+<div class="container">
+<h5 class="text-center my-5">Update {{ data.namafilm }}</h5>
+
+    <form method="post" enctype="multipart/form-data">
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Nama Film :</label>
+      <div class="col-md-10">
+        <input
+          name="namafilm"
+          type="text"
+          class="form-control"
+          value="{{ data.namafilm }}"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Deskripsi Film :</label>
+      <div class="col-md-10">
+        <textarea
+          name="deskripsi"
+          class="form-control"
+        >{{ data.deskripsi }}</textarea>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Tahun Rilis :</label>
+      <div class="col-md-10">
+        <input
+          name="tahunrilis"
+          type="text"
+          class="form-control"
+          value="{{ data.tahunrilis }}"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Sutradara :</label>
+      <div class="col-md-10">
+        <input
+          name="sutradara"
+          type="text"
+          class="form-control"
+          value="{{ data.sutradara }}"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Bintang Film :</label>
+      <div class="col-md-10">
+        <input
+          name="artis"
+          type="text"
+          class="form-control"
+          value="{{ data.artis }}"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Tipe Film :</label>
+      <div class="col-md-10">
+        <Select name="filmtype">
+            <option value="animated">Animated</option>
+            <option value="drama">Drama</option>
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
+        </Select>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Poster Film :</label>
+      <div class="col-md-4">
+        <input name="poster" type="file" class="form-control" value="{{ data.posterfilm }}" required/>
+        <img width="20%" class="my-4" src="{{url_for('static', filename='images/' ~ data.posterfilm )}}" alt="{{ data.posterfilm }}">
+      </div>
+      <label class="col-form-label col-md-2" for="">Video Film :</label>
+      <div class="col-md-4">
+        <input name="videofilm" type="file" class="form-control" value="{{ data.videofilm }}" required/>
+        <video width="45%" controls class="my-4"><source src="{{url_for('static', filename='videos/' ~ data.videofilm )}}" alt="{{ data.posterfilm }}" ></video>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-form-label col-md-2" for="">Genre Film :</label>
+      <div class="col-md-10">
+        <select name="idgenre" class="form-control">
+          {% for i in genre %}
+          <option value="{{ i.idgenre }}">{{ i.tipegenre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="mx-4 my-4">
+      <input type="submit" class="btn btn-success" />
+      <a href="/film/tampil" class="btn btn-primary">Kembali</a>
+    </div>
+  </form>
+</div>
+
+
+
+{% endblock %}
